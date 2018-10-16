@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">YoutubeApp</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="searchHint">Try "Linkin Park"</string>
+    <string name="failure">onInitializationFailure</string>
+    <string name="thumbnail">thumbnail</string>
+    <string name="video_title">video_title</string>
+    <string name="comment">Nice video!</string>
+    <string name="comment_author">Test Robot</string>
+    <string name="no_comments">No comments yet</string>
+
+
+    <string name="items">items</string>
+    <string name="snippet">snippet</string>
+    <string name="topLevelComment">topLevelComment</string>
+    <string name="textDisplay">textDisplay</string>
+    <string name="authorDisplayName">authorDisplayName</string>
+
+
+</resources>
