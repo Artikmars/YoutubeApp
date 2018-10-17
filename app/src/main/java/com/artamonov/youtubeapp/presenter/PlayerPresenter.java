@@ -1,7 +1,10 @@
 package com.artamonov.youtubeapp.presenter;
 
+import android.app.Activity;
+
 import com.artamonov.youtubeapp.contract.PlayerContract;
 import com.artamonov.youtubeapp.network.OkHtttpHandler;
+import com.artamonov.youtubeapp.utils.KeyboardUtils;
 
 public class PlayerPresenter implements PlayerContract.PlayerPresenter {
     private final PlayerContract.PlayerView view;
@@ -22,6 +25,9 @@ public class PlayerPresenter implements PlayerContract.PlayerPresenter {
 
     public void inflateComments(String response) {
         view.parseJSONComments(response);
+    }
+    public void hideKeyboard(Activity activity){
+        KeyboardUtils.hideKeyboard(activity);
     }
 
 }

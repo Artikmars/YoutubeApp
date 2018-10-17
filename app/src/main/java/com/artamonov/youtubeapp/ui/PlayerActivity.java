@@ -1,8 +1,11 @@
 package com.artamonov.youtubeapp.ui;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +33,7 @@ public class PlayerActivity extends YouTubeBaseActivity implements OnInitialized
     private RecyclerView rvComments;
 
     private PlayerContract.PlayerPresenter presenter;
-
+Activity activity = new Activity();
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -40,6 +43,8 @@ public class PlayerActivity extends YouTubeBaseActivity implements OnInitialized
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvComments = findViewById(R.id.rv_comments);
         rvComments.setLayoutManager(layoutManager);
+        LinearLayout layout = findViewById(R.id.linear_layout);
+        activity = this;
 
         YouTubePlayerView playerView = findViewById(R.id.youtubePlayerDetail);
         playerView.initialize(YoutubeConnector.API_KEY, this);
@@ -50,7 +55,11 @@ public class PlayerActivity extends YouTubeBaseActivity implements OnInitialized
         if (NetworkUtils.isNetworkAvailable(getApplicationContext())) {
             presenter.searchComments(videoId);
         } else {
-            System.out.println("Response is not successful");
+            Snackbar snackbar = Snackbar
+                    .make(layout, getResources().getString(R.string.check_connection),
+                            Snackbar.LENGTH_LONG);
+            snackbar.show();
+            presenter.hideKeyboard(this);
         }
     }
 

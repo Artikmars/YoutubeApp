@@ -8,6 +8,7 @@
     <string name="comment">Nice video!</string>
     <string name="comment_author">Test Robot</string>
     <string name="no_comments">No comments yet</string>
+    <string name="check_connection">Check your Internet connection and try again</string>
 
 
     <string name="items">items</string>
