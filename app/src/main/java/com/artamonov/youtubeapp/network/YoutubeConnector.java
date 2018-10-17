@@ -1,7 +1,9 @@
-package com.artamonov.youtubeapp;
+package com.artamonov.youtubeapp.network;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
+import com.artamonov.youtubeapp.contract.MainContract;
 import com.artamonov.youtubeapp.model.Video;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
@@ -19,32 +21,16 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class YoutubeConnector {
+public class YoutubeConnector extends AsyncTask<String, Void, List<Video>> {
 
-    public static final String API_KEY = "AIzaSyCwbGziupadfpxuaTv72BsKZxOAQQDDj9A";
+    public static final String API_KEY = "YOUR_API_KEY";
     private static final String PACKAGE_NAME = "com.artamonov.youtubeapp";
     private static final long MAX_RESULTS = 25;
     private YouTube.Search.List query;
+    private MainContract.MainPresenter presenter;
 
-    YoutubeConnector() {
-        YouTube youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
-
-            @Override
-            public void initialize(HttpRequest request) throws IOException {
-                request.getHeaders().set("X-Android-Package", PACKAGE_NAME);
-            }
-        }).setApplicationName("SearchYoutube").build();
-
-        try {
-
-            query = youtube.search().list("id,snippet");
-            query.setKey(API_KEY);
-            query.setType("video");
-            query.setFields("items(id/kind,id/videoId,snippet/title,snippet/description,snippet/thumbnails/high/url)");
-
-        } catch (IOException e) {
-            Log.d("YC", "Could not initialize: " + e);
-        }
+    public YoutubeConnector(MainContract.MainPresenter presenter) {
+        this.presenter = presenter;
     }
 
     private static List<Video> setItemsList(Iterator<SearchResult> iteratorSearchResults) {
@@ -72,13 +58,37 @@ public class YoutubeConnector {
         return tempSetItems;
     }
 
-    public List<Video> search(String keywords) {
+    @Override
+    protected void onPostExecute(List<Video> videos) {
+        super.onPostExecute(videos);
+        presenter.getVideoList(videos);
+    }
 
-        query.setQ(keywords);
-        query.setMaxResults(MAX_RESULTS);
+    @Override
+    protected List<Video> doInBackground(String... strings) {
+        YouTube youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
+
+            @Override
+            public void initialize(HttpRequest request) {
+                request.getHeaders().set("X-Android-Package", PACKAGE_NAME);
+            }
+        }).setApplicationName("SearchYoutube").build();
 
         try {
 
+            query = youtube.search().list("id,snippet");
+            query.setKey(API_KEY);
+            query.setType("video");
+            query.setFields("items(id/kind,id/videoId,snippet/title,snippet/description,snippet/thumbnails/high/url)");
+
+        } catch (IOException e) {
+            Log.d("YC", "Could not initialize: " + e);
+        }
+
+        query.setQ(strings[0]);
+        query.setMaxResults(MAX_RESULTS);
+
+        try {
             SearchListResponse response = query.execute();
             List<SearchResult> results = response.getItems();
             List<Video> items = new ArrayList<Video>();

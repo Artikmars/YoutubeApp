@@ -19,13 +19,12 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 
-
 public class YoutubeAdapter extends RecyclerView.Adapter<YoutubeAdapter.MyViewHolder> {
 
     private Context mContext;
     private List<Video> mVideoList;
 
-    YoutubeAdapter(Context mContext, List<Video> mVideoList) {
+    public YoutubeAdapter(Context mContext, List<Video> mVideoList) {
         this.mContext = mContext;
         this.mVideoList = mVideoList;
     }
@@ -49,7 +48,7 @@ public class YoutubeAdapter extends RecyclerView.Adapter<YoutubeAdapter.MyViewHo
 
         Picasso.get()
                 .load(singleVideo.getThumbnailURL())
-                .resize(480,270)
+                .resize(480, 270)
                 .centerCrop()
                 .into(holder.thumbnail);
 
@@ -60,11 +59,16 @@ public class YoutubeAdapter extends RecyclerView.Adapter<YoutubeAdapter.MyViewHo
 
                 Intent intent = new Intent(mContext, PlayerActivity.class);
                 intent.putExtra("VIDEO_ID", singleVideo.getId());
-                intent.putExtra("VIDEO_TITLE",singleVideo.getTitle());
+                intent.putExtra("VIDEO_TITLE", singleVideo.getTitle());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public int getItemCount() {
+        return mVideoList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -80,10 +84,5 @@ public class YoutubeAdapter extends RecyclerView.Adapter<YoutubeAdapter.MyViewHo
             video_title = view.findViewById(R.id.video_title);
             video_view = view.findViewById(R.id.video_view);
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return mVideoList.size();
     }
 }

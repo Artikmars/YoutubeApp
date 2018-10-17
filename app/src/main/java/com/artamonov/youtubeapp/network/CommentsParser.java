@@ -1,7 +1,8 @@
-package com.artamonov.youtubeapp;
+package com.artamonov.youtubeapp.network;
 
 import android.content.Context;
 
+import com.artamonov.youtubeapp.R;
 import com.artamonov.youtubeapp.model.Video;
 
 import org.json.JSONArray;
