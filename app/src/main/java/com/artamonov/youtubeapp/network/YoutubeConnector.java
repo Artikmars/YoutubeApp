@@ -26,8 +26,8 @@ public class YoutubeConnector extends AsyncTask<String, Void, List<Video>> {
     public static final String API_KEY = "YOUR_API_KEY";
     private static final String PACKAGE_NAME = "com.artamonov.youtubeapp";
     private static final long MAX_RESULTS = 25;
+    private final MainContract.MainPresenter presenter;
     private YouTube.Search.List query;
-    private MainContract.MainPresenter presenter;
 
     public YoutubeConnector(MainContract.MainPresenter presenter) {
         this.presenter = presenter;
@@ -49,7 +49,6 @@ public class YoutubeConnector extends AsyncTask<String, Void, List<Video>> {
                 Thumbnail thumbnail = singleVideo.getSnippet().getThumbnails().getHigh();
                 item.setId(singleVideo.getId().getVideoId());
                 item.setTitle(singleVideo.getSnippet().getTitle());
-                item.setDescription(singleVideo.getSnippet().getDescription());
                 item.setThumbnailURL(thumbnail.getUrl());
 
                 tempSetItems.add(item);

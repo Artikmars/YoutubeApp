@@ -7,18 +7,18 @@ import java.util.List;
 public interface MainContract {
 
     interface MainPresenter {
-        public void searchOnYoutube(String keywords);
+        void searchOnYoutube(String keywords);
 
-        public void getVideoList(List<Video> videoList);
+        void getVideoList(List<Video> videoList);
     }
 
     interface MainView {
 
-        public void showProgressDialog();
+        void showProgressDialog();
 
-        public void dismissProgressDialog();
+        void dismissProgressDialog();
 
-        public void inflateVideoList(List<Video> videoList);
+        void inflateVideoList(List<Video> videoList);
     }
 
 }

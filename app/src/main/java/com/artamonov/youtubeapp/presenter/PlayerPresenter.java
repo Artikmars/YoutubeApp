@@ -4,7 +4,7 @@ import com.artamonov.youtubeapp.contract.PlayerContract;
 import com.artamonov.youtubeapp.network.OkHtttpHandler;
 
 public class PlayerPresenter implements PlayerContract.PlayerPresenter {
-    private PlayerContract.PlayerView view;
+    private final PlayerContract.PlayerView view;
 
     public PlayerPresenter(PlayerContract.PlayerView view) {
         this.view = view;

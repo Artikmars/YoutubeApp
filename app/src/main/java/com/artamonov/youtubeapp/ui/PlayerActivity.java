@@ -24,13 +24,12 @@ import com.google.android.youtube.player.YouTubePlayerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerActivity extends YouTubeBaseActivity implements OnInitializedListener, PlayerContract.PlayerView, PlayerContract.ResponseListener {
+public class PlayerActivity extends YouTubeBaseActivity implements OnInitializedListener, PlayerContract.PlayerView {
 
     private static List<Video> videoComments = new ArrayList<>();
-    RecyclerView rvComments;
+    private RecyclerView rvComments;
 
     private PlayerContract.PlayerPresenter presenter;
-    private PlayerContract.ResponseListener listener;
 
     @Override
     protected void onCreate(Bundle bundle) {
@@ -69,19 +68,6 @@ public class PlayerActivity extends YouTubeBaseActivity implements OnInitialized
 
     @Override
     public void parseJSONComments(String response) {
-        videoComments = CommentsParser.parseCommentsJSON(getApplicationContext(), response);
-        CommentsAdapter commentsAdapter = new CommentsAdapter
-                (PlayerActivity.this, videoComments);
-        rvComments.setAdapter(commentsAdapter);
-    }
-
-    @Override
-    public void inflateVideoList() {
-
-    }
-
-    @Override
-    public void onSuccess(String response) {
         videoComments = CommentsParser.parseCommentsJSON(getApplicationContext(), response);
         CommentsAdapter commentsAdapter = new CommentsAdapter
                 (PlayerActivity.this, videoComments);

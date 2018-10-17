@@ -50,10 +50,10 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView comment;
-        TextView commentAuthor;
+        final TextView comment;
+        final TextView commentAuthor;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             comment = itemView.findViewById(R.id.comment);
             commentAuthor = itemView.findViewById(R.id.comment_author);

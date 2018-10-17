@@ -3,7 +3,6 @@ package com.artamonov.youtubeapp.model;
 public class Video {
     private String id;
     private String title;
-    private String description;
     private String thumbnailURL;
     private String comment;
     private String commentAuthor;
@@ -38,14 +37,6 @@ public class Video {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getThumbnailURL() {

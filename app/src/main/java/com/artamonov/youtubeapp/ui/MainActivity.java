@@ -22,7 +22,7 @@ import java.util.List;
 
 public class MainActivity extends YouTubeBaseActivity implements MainContract.MainView {
 
-    String keyword;
+    private String keyword;
     private RecyclerView mRecyclerView;
     private ProgressDialog mProgressDialog;
     private MainPresenter mainActivityPresenter;

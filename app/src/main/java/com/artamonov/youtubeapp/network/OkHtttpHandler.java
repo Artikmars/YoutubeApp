@@ -14,9 +14,7 @@ import okhttp3.Response;
 public class OkHtttpHandler extends AsyncTask<String, Void, String> {
 
     private static final String TAG = "myLogs";
-
-    PlayerContract.PlayerView view;
-    private PlayerContract.PlayerPresenter presenter;
+    private final PlayerContract.PlayerPresenter presenter;
 
     public OkHtttpHandler(PlayerContract.PlayerPresenter presenter) {
         this.presenter = presenter;

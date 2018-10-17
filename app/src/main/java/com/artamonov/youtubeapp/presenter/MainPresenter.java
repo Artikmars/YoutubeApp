@@ -8,7 +8,7 @@ import java.util.List;
 
 public class MainPresenter implements MainContract.MainPresenter {
 
-    private MainContract.MainView view;
+    private final MainContract.MainView view;
 
     public MainPresenter(MainContract.MainView view) {
         this.view = view;
